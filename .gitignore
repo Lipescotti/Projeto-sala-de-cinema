@@ -1,32 +1,54 @@
-# Prerequisites
-*.d
+#include <stdio.h>
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+main()
+{
+	char cinema[900][3], sair;
+	int sala, acento;
+	
+	do
+	{	
+		do
+		{
+			printf("Sala solicitada(1, 2 ou 3): ");
+			scanf("%d", &sala);
+			if(sala < 1 || sala > 3)
+			{
+				printf("ENTRADA INVALIDA\n\n");
+			}
+			sala = sala-1;
+		}while(sala < 0 || sala > 2);
+	
+		for(int f = 0; f < 900; f++)
+		{
+			if(cinema[f][sala] != 'X')
+			{
+				if(f < 9)
+				{
+					printf("00%d ", f+1);
+				}
+				else if(f < 99)
+				{
+					printf("0%d ", f+1);
+				}
+				else
+				{
+					printf("%d ", f+1);
+				}
+			}
+			else
+			{
+				printf(" X  ");
+			}
+			if((f+1)%10==0)
+			{
+				printf("\n");
+			}
+		}
+		printf("\n\nQual acento você deseja ?\n");
+		scanf("%d", &acento);
+		cinema[acento-1][sala] = 'X';
+		
+	printf("\n\nSair ? (s ou n)");
+	scanf(" %c", &sair);
+	}while(sala != 's' || sala != 'S');
+}
