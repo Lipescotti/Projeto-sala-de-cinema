@@ -1,54 +1,62 @@
 #include <stdio.h>
 
-main()
+int main()
 {
-	char cinema[900][3], sair;
-	int sala, acento;
-	
-	do
-	{	
-		do
-		{
-			printf("Sala solicitada(1, 2 ou 3): ");
-			scanf("%d", &sala);
-			if(sala < 1 || sala > 3)
-			{
-				printf("ENTRADA INVALIDA\n\n");
-			}
-			sala = sala-1;
-		}while(sala < 0 || sala > 2);
-	
-		for(int f = 0; f < 900; f++)
-		{
-			if(cinema[f][sala] != 'X')
-			{
-				if(f < 9)
-				{
-					printf("00%d ", f+1);
-				}
-				else if(f < 99)
-				{
-					printf("0%d ", f+1);
-				}
-				else
-				{
-					printf("%d ", f+1);
-				}
-			}
-			else
-			{
-				printf(" X  ");
-			}
-			if((f+1)%10==0)
-			{
-				printf("\n");
-			}
-		}
-		printf("\n\nQual acento você deseja ?\n");
-		scanf("%d", &acento);
-		cinema[acento-1][sala] = 'X';
-		
-	printf("\n\nSair ? (s ou n)");
-	scanf(" %c", &sair);
-	}while(sala != 's' || sala != 'S');
+    char cinema[900][3], sair;
+    int sala, acento;
+
+    for (int o = 0; o < 3; o++) {
+        for (int g = 0; g < 900; g++) {
+            cinema[g][o] = '#'; 
+        }
+    }
+
+    do {
+        do {
+            printf("Sala solicitada (1, 2 ou 3): ");
+            scanf("%d", &sala);
+            if (sala < 1 || sala > 3) {
+                printf("ENTRADA INVALIDA\n\n");
+            }
+            sala = sala - 1; 
+        } while (sala < 0 || sala > 2);
+
+        for (int f = 0; f < 900; f++) {
+            if (cinema[f][sala] == '#') { 
+                if (f < 9) {
+                    printf("00%d ", f + 1); 
+                } else if (f < 99) {
+                    printf("0%d ", f + 1); 
+                } else {
+                    printf("%d ", f + 1); 
+                }
+            } else {
+                printf(" X  "); 
+            }
+
+            if ((f + 1) % 15 == 0) {
+                printf("\n");
+            }
+        }
+
+        printf("\n\nQual acento você deseja ?\n");
+        scanf("%d", &acento);
+
+        if (acento > 0 && acento <= 900) {
+            if (cinema[acento - 1][sala] == '#') {  
+                cinema[acento - 1][sala] = 'X';  
+            } else {
+                printf("Este assento já está ocupado.\n");
+            }
+        } else {
+            printf("Acento inválido.\n");
+        }
+
+       
+        printf("\n\nSair ? (s ou n): ");
+        scanf(" %c", &sair); 
+
+    } while (sair != 's' && sair != 'S');  
+
+    return 0;
 }
