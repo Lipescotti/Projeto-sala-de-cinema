@@ -1,17 +1,24 @@
 #include <stdio.h>
+#include <locale.h>
+#include<stdlib.h>
 
 int main()
 {
+	setlocale(LC_ALL, "Portuguese");
     char cinema[900][3], sair;
-    int sala, acento;
+    int sala, assento;
 
+
+//Evitar resto de memoria
     for (int o = 0; o < 3; o++) {
         for (int g = 0; g < 900; g++) {
             cinema[g][o] = '#'; 
         }
     }
 
+//Funcionamento
     do {
+    	system("cls");
         do {
             printf("Sala solicitada (1, 2 ou 3): ");
             scanf("%d", &sala);
@@ -20,7 +27,11 @@ int main()
             }
             sala = sala - 1; 
         } while (sala < 0 || sala > 2);
-
+		
+		
+		printf("\n\n\n");
+		printf("                                     |___________________________________________|\n\n\n");
+		
         for (int f = 0; f < 900; f++) {
             if (cinema[f][sala] == '#') { 
                 if (f < 9) {
@@ -34,28 +45,47 @@ int main()
                 printf(" X  "); 
             }
 
-            if ((f + 1) % 15 == 0) {
+            if ((f + 1) % 30 == 0) {
                 printf("\n");
             }
         }
 
-        printf("\n\nQual acento você deseja ?\n");
-        scanf("%d", &acento);
-
-        if (acento > 0 && acento <= 900) {
-            if (cinema[acento - 1][sala] == '#') {  
-                cinema[acento - 1][sala] = 'X';  
-            } else {
+        
+		do
+		{
+			printf("\n\nQual acento você deseja ?\n");
+        	scanf("%d", &assento);
+						
+			if (assento > 0 && assento <= 900) 
+			{
+            	if (cinema[assento - 1][sala] == '#') 
+				{  
+                	cinema[assento - 1][sala] = 'X';  
+            	} 
+				else 
+				{
                 printf("Este assento já está ocupado.\n");
-            }
-        } else {
-            printf("Acento inválido.\n");
-        }
-
+            	}
+        	} 
+			else
+			{
+            	printf("Assento inválido.\n");
+        	}	
+		}while(assento < 0 || assento > 900);
        
+
+       do
+       {
         printf("\n\nSair ? (s ou n): ");
         scanf(" %c", &sair); 
+		
+		if(sair != 's' && sair != 'S' && sair != 'N' && sair != 'n')
+		{
+			printf("\nENTRADA INVALIDA");
+		}
+	   }while(sair != 's' && sair != 'S' && sair != 'N' && sair != 'n');
 
+		
     } while (sair != 's' && sair != 'S');  
 
     return 0;
