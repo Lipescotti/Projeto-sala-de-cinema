@@ -33,15 +33,14 @@ int main()
 		printf("                                     |___________________________________________|\n\n\n");
 		
         for (int f = 0; f < 900; f++) {
-            if (cinema[f][sala] == '#') { 
-                if (f < 9) {
-                    printf("00%d ", f + 1); 
-                } else if (f < 99) {
-                    printf("0%d ", f + 1); 
-                } else {
-                    printf("%d ", f + 1); 
-                }
-            } else {
+            if (cinema[f][sala] == '#') 
+			{ 
+                printf("%0.3d ", f + 1); 
+                
+            }
+			
+			else 
+			{
                 printf(" X  "); 
             }
 
@@ -65,6 +64,7 @@ int main()
 				else 
 				{
                 printf("Este assento já está ocupado.\n");
+                assento = -1;
             	}
         	} 
 			else
